@@ -1,0 +1,25 @@
+html {
+    
+    text-align: center;
+    background-color: AntiqueWhite;
+    
+    
+}
+
+
+
+li{
+     list-style-type:none;
+     display:inline;
+     padding-right:5px;
+     text-align: center;
+    
+}
+
+ul{
+     list-style-type: none;
+     display:inline;
+     padding-right:5px;
+     text-align: center;
+    
+}

@@ -1,27 +1,42 @@
- <html>
- <script type="text/javascript" src="jquery-1.3.2.js"> </script>
+window.onload = function () {
+  main();
+};
 
- <script type="text/javascript">
+function main()
+{
+    var lookup = document.getElementById("lookup");
+    lookup.addEventListener("click",function(){getcountry('world.php?')});
+}
 
-function () {
+function getcountry(url)
+{
+    var httpRequest = new XMLHttpRequest();
+    var country = document.getElementById("country").value; 
+    var newurl = "";
+    
+    if (document.getElementById('Allcountries').checked){
+        newurl = url + "all=true";
+    } else {
+        newurl = url + "country=" + country;
+    }
 
-    $("#lookup").click(function() {                
-
-      $.ajax({    //create an ajax request to load_page.php
-        type: "GET",
-        url: "world.php",             
-        dataType: "html",   //expect html to be returned                
-        success: function(response){                    
-            $("#responsecontainer").html(response); 
-            alert(response);
+    
+    httpRequest.onreadystatechange = function()
+    {
+        if (httpRequest.readyState == XMLHttpRequest.DONE) 
+        {
+            if(httpRequest.status == 200)
+            { 
+                document.getElementById("result").innerHTML= httpRequest.responseText;
+                alert(httpRequest.responseText);
+            }
+            else
+            {
+                alert("There is an error");
+            }
         }
-
-    });
-});
-
-
-</script>
-
-
-
-</html>
+    };
+    
+    httpRequest.open('GET',newurl,true);
+    httpRequest.send();
+}
